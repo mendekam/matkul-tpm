@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:kuis1/const/color.dart';
 import 'dart:math';
 
@@ -67,8 +65,8 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
                       backgroundColor: primary,
                       minimumSize: const Size.fromHeight(20),
                     ),
-                    child: const Text('Hitung Luas'),
                     onPressed: luasSegitiga,
+                    child: const Text('Hitung Luas'),
                   )),
                   Container(
                   height: 80,
@@ -78,8 +76,8 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
                       backgroundColor: primary,
                       minimumSize: const Size.fromHeight(20),
                     ),
-                    child: const Text('Hitung Keliling'),
                     onPressed: kelilingSegitiga,
+                    child: const Text('Hitung Keliling'),
                   )),
             ]),
 
@@ -95,7 +93,7 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
     luas = height * width / 2;
 
     setState(() {
-      hasil = "Luas : " +luas.toString();
+      hasil = "Luas : $luas";
     });
   }
 
@@ -107,7 +105,7 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
     keliling = sqrt(pow(width, 2) + pow(height, 2)) + (height + width);
 
     setState(() {
-      hasil = "Keliling : " +keliling.toString();
+      hasil = "Keliling : $keliling";
     });
   }
 }

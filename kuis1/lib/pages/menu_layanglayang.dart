@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:kuis1/const/color.dart';
 
 class MenuLayangLayang extends StatefulWidget {
@@ -66,8 +64,8 @@ class _MenuLayangLayangState extends State<MenuLayangLayang> {
                       backgroundColor: primary,
                       minimumSize: const Size.fromHeight(50),
                     ),
-                    child: const Text('Hitung Luas'),
                     onPressed: luasLayangLayang,
+                    child: const Text('Hitung Luas'),
                   )),
                   Container(
                   height: 80,
@@ -77,8 +75,8 @@ class _MenuLayangLayangState extends State<MenuLayangLayang> {
                       backgroundColor: primary,
                       minimumSize: const Size.fromHeight(50),
                     ),
-                    child: const Text('Hitung Keliling'),
                     onPressed: kelilingLayangLayang,
+                    child: const Text('Hitung Keliling'),
                   )),
             ]),
       ),
@@ -105,7 +103,7 @@ class _MenuLayangLayangState extends State<MenuLayangLayang> {
     keliling = 2*diagonal1 + 2*diagonal2;
 
     setState(() {
-      hasil = "Keliling : " +keliling.toString();
+      hasil = "Keliling : $keliling";
     });
   }
 }
