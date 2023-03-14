@@ -22,6 +22,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: _widgetOptions.elementAt(selectedIndex),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:kuis1/const/color.dart';
 
 class MenuLayangLayang extends StatefulWidget {
   const MenuLayangLayang({super.key});
@@ -19,6 +20,7 @@ class _MenuLayangLayangState extends State<MenuLayangLayang> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,13 +60,25 @@ class _MenuLayangLayangState extends State<MenuLayangLayang> {
               ),
               Container(
                   height: 80,
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: primary,
                       minimumSize: const Size.fromHeight(50),
                     ),
-                    child: const Text('Hitung'),
+                    child: const Text('Hitung Luas'),
                     onPressed: luasLayangLayang,
+                  )),
+                  Container(
+                  height: 80,
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primary,
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    child: const Text('Hitung Keliling'),
+                    onPressed: kelilingLayangLayang,
                   )),
             ]),
       ),
@@ -80,6 +94,18 @@ class _MenuLayangLayangState extends State<MenuLayangLayang> {
 
     setState(() {
       hasil = luas.toString();
+    });
+  }
+
+  void kelilingLayangLayang() {
+    double keliling;
+    diagonal1 = double.parse(diagonal1Controller.text);
+    diagonal2 = double.parse(diagonal2Controller.text);
+
+    keliling = 2*diagonal1 + 2*diagonal2;
+
+    setState(() {
+      hasil = "Keliling : " +keliling.toString();
     });
   }
 }

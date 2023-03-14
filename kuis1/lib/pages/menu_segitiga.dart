@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:kuis1/const/color.dart';
+import 'dart:math';
 
 class MenuSegitiga extends StatefulWidget {
   const MenuSegitiga({super.key});
@@ -19,6 +21,7 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,15 +61,28 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
               ),
               Container(
                   height: 80,
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50),
+                      backgroundColor: primary,
+                      minimumSize: const Size.fromHeight(20),
                     ),
-                    child: const Text('Hitung'),
+                    child: const Text('Hitung Luas'),
                     onPressed: luasSegitiga,
                   )),
+                  Container(
+                  height: 80,
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primary,
+                      minimumSize: const Size.fromHeight(20),
+                    ),
+                    child: const Text('Hitung Keliling'),
+                    onPressed: kelilingSegitiga,
+                  )),
             ]),
+
       ),
     );
   }
@@ -79,7 +95,19 @@ class _MenuSegitigaState extends State<MenuSegitiga> {
     luas = height * width / 2;
 
     setState(() {
-      hasil = luas.toString();
+      hasil = "Luas : " +luas.toString();
+    });
+  }
+
+  void kelilingSegitiga() {
+    double keliling;
+    width = double.parse(widthController.text);
+    height = double.parse(heightController.text);
+
+    keliling = sqrt(pow(width, 2) + pow(height, 2)) + (height + width);
+
+    setState(() {
+      hasil = "Keliling : " +keliling.toString();
     });
   }
 }
