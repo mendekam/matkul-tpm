@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DataDiri extends StatelessWidget {
-  const DataDiri({Key? key}) : super(key: key);
+  const DataDiri({super.key});
+  
 
   @override
   Widget build(BuildContext context) {

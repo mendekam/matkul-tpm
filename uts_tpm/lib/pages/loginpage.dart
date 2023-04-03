@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:uts_tpm/pages/homepage.dart';
 
 import '../config/colors.dart';
+import '../data/users.dart';
+import 'calculatorpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController nimController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -32,15 +35,16 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(bottom: 20.0),
               child: TextFormField(
                 style: TextStyle(color: primary),
-                controller: usernameController,
+                controller: nimController,
                 decoration: const InputDecoration(
-                    labelText: "Username",
+                    labelText: "NIM",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     )),
               ),
             ),
             Container(
+              padding: const EdgeInsets.only(bottom: 20.0),
               child: TextFormField(
                 obscureText: true,
                 style: TextStyle(color: primary),
@@ -52,7 +56,37 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     )),
               ),
-            )
+            ),
+            TextButton(
+              onPressed: () {
+                bool msg = false;
+                for (var user in userList) {
+                  if (nimController.text == user.nim &&
+                      passwordController.text == user.password) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                  nim: nimController.text,
+                                )));
+                    msg = true;
+                    break;
+                  }
+                }
+                if (msg = false) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Username atau Password Salah'),
+                ));
+                }
+                
+              },
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(primary)),
+              child: Text(
+                "Login",
+                style: TextStyle(color: base),
+              ),
+            ),
           ]),
         )));
   }

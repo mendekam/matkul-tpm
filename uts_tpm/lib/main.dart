@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-
 import 'config/colors.dart';
 import 'pages/loginpage.dart';
 
