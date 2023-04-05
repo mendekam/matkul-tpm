@@ -29,26 +29,26 @@ class _CalculatorPageState extends State<CalculatorPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: primary,
-                            fixedSize: Size(200, 50),),
+                            fixedSize: const Size(200, 50),),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const TrapesiumPage()));
                           },
-                          child: Text("Trafesium")),
+                          child: const Text("Trapesium")),
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: primary,
-                          fixedSize: Size(200, 50),),
+                          fixedSize: const Size(200, 50),),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const TabungPage()));
                         },
-                        child: Text("Tabung")),
+                        child: const Text("Tabung")),
                   ],
                 ))));
   }

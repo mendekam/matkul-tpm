@@ -20,6 +20,10 @@ class _TabungPageState extends State<TabungPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tabung'),
+        backgroundColor: primary,
+      ),
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
@@ -29,7 +33,7 @@ class _TabungPageState extends State<TabungPage> {
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
                 child: Image.asset(
-                  'assets/layanglayang.jpg',
+                  'assets/images/tabung.png',
                   height: 200,
                   width: 200,
                 ),

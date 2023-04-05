@@ -21,6 +21,10 @@ class _TrapesiumPageState extends State<TrapesiumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Trapesium'),
+        backgroundColor: primary,
+      ),
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
@@ -30,7 +34,7 @@ class _TrapesiumPageState extends State<TrapesiumPage> {
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
                 child: Image.asset(
-                  'assets/layanglayang.jpg',
+                  'assets/images/trapesium.jpg',
                   height: 200,
                   width: 200,
                 ),

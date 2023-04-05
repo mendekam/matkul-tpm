@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:uts_tpm/pages/homepage.dart';
 
 import '../config/colors.dart';
 import '../data/users.dart';
-import 'calculatorpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,6 +14,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController nimController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool msg = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +25,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
               padding: const EdgeInsets.only(bottom: 20.0),
-              child: Image.network(
-                  "https://media.tenor.com/PcW-wwaipH8AAAAM/kumala.gif"),
+              child: Text(
+                "Login",
+                style: TextStyle(
+                    color: primary, fontSize: 30, fontWeight: FontWeight.bold),
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(bottom: 20.0),
@@ -59,7 +59,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextButton(
               onPressed: () {
-                bool msg = false;
                 for (var user in userList) {
                   if (nimController.text == user.nim &&
                       passwordController.text == user.password) {
@@ -73,12 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                     break;
                   }
                 }
-                if (msg = false) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Username atau Password Salah'),
                 ));
-                }
-                
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(primary)),
