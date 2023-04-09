@@ -9,11 +9,6 @@ class User {
 
 List<User> userList = [
   User(
-    name: 'admin',
-    password: 'admin',
-    nim: '1111111111',
-  ),
-  User(
     name: 'abid',
     password: 'abid',
     nim: '123200069',

@@ -25,10 +25,9 @@ class _AnggotaPageState extends State<AnggotaPage> {
               itemCount: userList.length,
               itemBuilder: ((context, index) {
                 return ListTile(
-                  title: Text("${userList[index].name}"),
+                  title: Text(userList[index].name),
                   subtitle: Text(
                       "NIM : ${userList[index].nim} \nKelas : ${userList[index].kelas}"),
-                  trailing: const Icon(Icons.arrow_forward_ios),
                 );
               })),
         ));

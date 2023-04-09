@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../const/colors.dart';
 import '../data/users.dart';
-import '../navigation/bottomnavigation.dart';
+import '../widget/bottomnavigation.dart';
 import 'homepage.dart';
 
 class LoginPage extends StatefulWidget {
