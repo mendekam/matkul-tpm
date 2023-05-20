@@ -16,12 +16,12 @@ List<User> userList = [
   User(
     name: 'agil',
     password: 'agil',
-    nim: '1232000mbuh',
+    nim: '123200109',
   ),
   
   User(
     name: 'edwin',
     password: 'edwin',
-    nim: '1232000mbuh',
+    nim: '123200074',
   ),
 ];
