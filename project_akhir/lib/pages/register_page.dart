@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../config/colors.dart';
 import '../database/database_helper.dart';
-import '../model/user_model.dart';
+import '../models/user_model.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -21,90 +22,130 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register')),
+      backgroundColor: primary,
       body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Username'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a username';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter an email';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _nimController,
-                decoration: InputDecoration(labelText: 'NIM'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a NIM';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    final username = _usernameController.text;
-                    final email = _emailController.text;
-                    final password = _passwordController.text;
-                    final nim = _nimController.text;
-                    final user = UserModel(
-                      username: username,
-                      email: email,
-                      password: password,
-                      nim: nim,
-                    );
-                    await DatabaseHelper.instance.saveUser(user);
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: Text('Success'),
-                        content: Text('Account registered successfully'),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, LoginPage.routeName);
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                },
-                child: Text('Register'),
-              ),
-            ],
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  style: TextStyle(color: primary),
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    fillColor: text,
+                    filled: true,
+                    labelText: 'Username'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a username';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10.0),
+                TextFormField(
+                  style: TextStyle(color: primary),
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    fillColor: text,
+                    filled: true,
+                    labelText: 'Email'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter an email';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10.0),
+                TextFormField(
+                  style: TextStyle(color: primary),
+                  controller: _passwordController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    fillColor: text,
+                    filled: true,
+                    labelText: 'Password'),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10.0),
+                TextFormField(
+                  style: TextStyle(color: primary),
+                  controller: _nimController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    fillColor: text,
+                    filled: true,
+                    labelText: 'NIM'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a NIM';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: text,
+                  ),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final username = _usernameController.text;
+                      final email = _emailController.text;
+                      final password = _passwordController.text;
+                      final nim = _nimController.text;
+                      final user = UserModel(
+                        username: username,
+                        email: email,
+                        password: password,
+                        nim: nim,
+                      );
+                      await DatabaseHelper.instance.saveUser(user);
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: const Text('Success'),
+                          content: const Text('Account registered successfully'),
+                          actions: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: primary,
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, LoginPage.routeName);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Register', style: TextStyle(color: primary)),
+                ),
+              ],
+            ),
           ),
         ),
       ),

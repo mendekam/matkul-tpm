@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'models/game_model.dart';
+import 'pages/game_detail_page.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
+import 'pages/splashscreen_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,16 +17,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Project Akhir TPM',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
 
-      initialRoute: LoginPage.routeName, // Set the initial route
+      initialRoute: SplashScreen.routeName, 
       routes: {
+        SplashScreen.routeName: (context) => SplashScreen(),
         HomePage.routeName: (context) => HomePage(),
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
-    // Add other routes for your app here
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == GameDetailPage.routeName) {
+          final game = settings.arguments as GameModel;
+          return MaterialPageRoute(
+            builder: (context) => GameDetailPage(game: game),
+          );
+        }
+        return null; 
       },
       home: FutureBuilder<bool>(
         future: isLoggedIn(),
