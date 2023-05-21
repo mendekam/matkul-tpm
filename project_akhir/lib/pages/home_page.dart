@@ -90,7 +90,11 @@ class _HomePageState extends State<HomePage> {
                   _filterGames();
                 });
               },
-              items: const [
+              items: [
+                DropdownMenuItem(
+                  value: 'All',
+                  child: Text('All'),
+                ),
                 DropdownMenuItem(
                   value: 'Shooter',
                   child: Text('Shooter'),
@@ -165,12 +169,11 @@ class _HomePageState extends State<HomePage> {
       _filteredGames =
           _games.where((game) => game.genre == 'Battle Royale').toList();
     } else if (_selectedFilter == 'MMORPG') {
-      _filteredGames =
-          _games.where((game) => game.genre == 'MMORPG').toList();
+      _filteredGames = _games.where((game) => game.genre == 'MMORPG').toList();
     } else if (_selectedFilter == 'Fighting') {
       _filteredGames =
           _games.where((game) => game.genre == 'Fighting').toList();
-    } else {
+    } else if (_selectedFilter == null || _selectedFilter == 'All'){
       _filteredGames = List.from(_games);
     }
   }

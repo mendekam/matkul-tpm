@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'models/game_model.dart';
 import 'pages/game_detail_page.dart';
 import 'pages/home_page.dart';
+import 'pages/konversi_page.dart';
 import 'pages/login_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/profile_page.dart';
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(builder: (context) => NavigationPage());
         } else if (settings.name == ProfilePage.routeName) {
           return MaterialPageRoute(builder: (context) => ProfilePage());
+        } else if (settings.name == KonversiPage.routeName) {
+          return MaterialPageRoute(builder: (context) => KonversiPage());
         }
         return null;
       },
