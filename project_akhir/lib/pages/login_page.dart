@@ -5,6 +5,7 @@ import '../config/colors.dart';
 import '../database/database_helper.dart';
 import '../models/user_model.dart';
 import 'home_page.dart';
+import 'navigation_page.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (user != null && user.password == password) {
                         await setLoggedIn(true);
                         Navigator.pushReplacementNamed(
-                            context, HomePage.routeName);
+                            context, NavigationPage.routeName);
                       } else {
                         showDialog(
                           context: context,

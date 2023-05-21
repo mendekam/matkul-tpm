@@ -1,11 +1,15 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:encrypt/encrypt.dart';
 
 import '../models/user_model.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._getInstance();
   static Database? _database;
+  static final _encryptionKey = Key.fromLength(32);
+  static final _iv = IV.fromLength(16);
+  static final _encrypter = Encrypter(AES(_encryptionKey));
 
   DatabaseHelper._getInstance();
 
@@ -19,7 +23,7 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    final String path = join(await getDatabasesPath(), 'app_database.db');
+    final String path = join(await getDatabasesPath(), 'appdatabase.db');
     return await openDatabase(
       path,
       version: 1,
@@ -41,7 +45,10 @@ class DatabaseHelper {
 
   Future<int> saveUser(UserModel user) async {
     final db = await database;
-    return await db.insert('users', user.toJson());
+    final userModelMap = user.toJson();
+    final encryptedPassword = _encrypter.encrypt(user.password, iv: _iv);
+    userModelMap['password'] = encryptedPassword.base64;
+    return await db.insert('users', userModelMap);
   }
 
   Future<UserModel?> getUser(String username) async {
@@ -53,7 +60,12 @@ class DatabaseHelper {
       limit: 1,
     );
     if (maps.isNotEmpty) {
-      return UserModel.fromJson(maps.first);
+      final userModelMap = maps.first;
+      final encryptedPassword = Encrypted.fromBase64(userModelMap['password']);
+      final decryptedPassword = _encrypter.decrypt(encryptedPassword, iv: _iv);
+      final modifiedUserModelMap = Map<String, dynamic>.from(userModelMap);
+      modifiedUserModelMap['password'] = decryptedPassword;
+      return UserModel.fromJson(modifiedUserModelMap);
     }
     return null;
   }

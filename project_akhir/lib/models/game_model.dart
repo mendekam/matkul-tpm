@@ -10,6 +10,7 @@ class GameModel {
   final String developer;
   final DateTime releaseDate;
   final String freetogameProfileUrl;
+  bool isFavorite = false;
 
   GameModel({
     required this.id,
@@ -23,6 +24,7 @@ class GameModel {
     required this.developer,
     required this.releaseDate,
     required this.freetogameProfileUrl,
+    this.isFavorite = false,
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) {
