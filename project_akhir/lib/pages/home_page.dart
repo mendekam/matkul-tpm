@@ -107,6 +107,10 @@ class _HomePageState extends State<HomePage> {
                   value: 'MMORPG',
                   child: Text('MMORPG'),
                 ),
+                DropdownMenuItem(
+                  value: 'Fighting',
+                  child: Text('Fighting'),
+                ),
               ],
             ),
           ]),
@@ -163,6 +167,11 @@ class _HomePageState extends State<HomePage> {
     } else if (_selectedFilter == 'MMORPG') {
       _filteredGames =
           _games.where((game) => game.genre == 'MMORPG').toList();
+    } else if (_selectedFilter == 'Fighting') {
+      _filteredGames =
+          _games.where((game) => game.genre == 'Fighting').toList();
+    } else {
+      _filteredGames = List.from(_games);
     }
   }
 }

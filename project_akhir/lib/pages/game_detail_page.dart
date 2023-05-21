@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_akhir/models/game_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../config/colors.dart';
 import '../services/favorite_service.dart';
@@ -11,8 +12,8 @@ class GameDetailPage extends StatelessWidget {
   const GameDetailPage({Key? key, required this.game}) : super(key: key);
 
   bool homePagePredicate(Route<dynamic> route) {
-      return route.isFirst && route.settings.name == HomePage.routeName;
-    }
+    return route.isFirst && route.settings.name == HomePage.routeName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,25 @@ class GameDetailPage extends StatelessWidget {
               Text(
                 game.title,
                 style: TextStyle(
-                    fontSize: 24.0, fontWeight: FontWeight.bold, color: primary),
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: primary),
+              ),
+              SizedBox(height: 8.0),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  game.title,
+                  style: TextStyle(fontSize: 25.0, color: text),
+                ),
+              ),
+              SizedBox(height: 8.0),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  game.shortDescription,
+                  style: TextStyle(fontSize: 18.0, color: text, decorationStyle: TextDecorationStyle.wavy),
+                ),
               ),
               SizedBox(height: 8.0),
               Text(
@@ -86,6 +105,21 @@ class GameDetailPage extends StatelessWidget {
                 'Developer: ${game.developer}',
                 style: TextStyle(fontSize: 18.0, color: text),
               ),
+              SizedBox(height: 8.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: text,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  onPressed: () {
+                    launchUrl(Uri.parse(game.gameUrl));
+                  },
+                  child: Text(
+                    "Open Game",
+                    style: TextStyle(fontSize: 18.0, color: primary),
+                  ))
             ],
           ),
         ),

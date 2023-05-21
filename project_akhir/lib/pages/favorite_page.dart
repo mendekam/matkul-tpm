@@ -18,6 +18,7 @@ class FavoritePage extends StatelessWidget {
     final favoriteGames = FavoriteService.getFavorites();
 
     return Scaffold(
+      backgroundColor: primary,
       appBar: AppBar(
         title: Text('Favorite Games'),
         backgroundColor: secondary,
@@ -45,7 +46,6 @@ class FavoritePage extends StatelessWidget {
                   Image.network(game.thumbnail),
                   SizedBox(height: 8.0),
                   Text(game.title, style: TextStyle(color: text)),
-                  Text(game.genre, style: TextStyle(color: text)),
                 ],
               ),
             ),
