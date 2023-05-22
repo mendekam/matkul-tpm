@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../config/colors.dart';
 import '../services/favorite_service.dart';
 import 'home_page.dart';
+import 'navigation_page.dart';
 
 class GameDetailPage extends StatelessWidget {
   static const String routeName = '/game_detail';
@@ -21,7 +22,7 @@ class GameDetailPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         Navigator.popUntil(context, homePagePredicate);
-        Navigator.pushNamed(context, HomePage.routeName);
+        Navigator.pushNamed(context, NavigationPage.routeName);
         return false;
       },
       child: Scaffold(

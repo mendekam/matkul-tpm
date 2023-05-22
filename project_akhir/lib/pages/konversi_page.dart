@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../config/colors.dart';
+import 'navigation_page.dart';
 
 class KonversiPage extends StatefulWidget {
   static const routeName = '/konversi';
@@ -18,7 +19,8 @@ class _KonversiPageState extends State<KonversiPage> {
 
   Future<void> _convertCurrency() async {
     try {
-      final response = await http.get(Uri.parse('https://v6.exchangerate-api.com/v6/e7094b25166d1a5bae26c303/latest/IDR'));
+      final response = await http.get(Uri.parse(
+          'https://v6.exchangerate-api.com/v6/e7094b25166d1a5bae26c303/latest/IDR'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final rates = data['conversion_rates'];
@@ -27,7 +29,8 @@ class _KonversiPageState extends State<KonversiPage> {
         _euro = rupiah * rates['EUR'];
         setState(() {});
       } else {
-        print('Failed to fetch conversion rates. Error: ${response.statusCode}');
+        print(
+            'Failed to fetch conversion rates. Error: ${response.statusCode}');
       }
     } catch (e) {
       print('Failed to fetch conversion rates. Exception: $e');
@@ -36,35 +39,48 @@ class _KonversiPageState extends State<KonversiPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: primary,
-      appBar: AppBar(
-        title: Text('Currency Conversion'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              style: TextStyle(color: text),
-              controller: _rupiahController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Amount in IDR',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.pushNamed(context, NavigationPage.routeName);
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: primary,
+        appBar: AppBar(
+          backgroundColor: secondary,
+          title: Text('Konversi Mata Uang'),
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                style: TextStyle(color: primary),
+                controller: _rupiahController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  fillColor: text,
+                  filled: true,
+                  labelText: 'Jumlah pada IDR',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _convertCurrency,
-              child: Text('Convert'),
-            ),
-            SizedBox(height: 16.0),
-            Text('Amount in USD: \$${_dollar.toStringAsFixed(2)}', style: TextStyle(color: text)),
-            Text('Amount in EUR: €${_euro.toStringAsFixed(2)}', style: TextStyle(color: text)),
-          ],
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: text),
+                onPressed: _convertCurrency,
+                child: Text('Convert', style: TextStyle(color: primary)),
+              ),
+              SizedBox(height: 16.0),
+              Text('Jumlah pada USD: \$${_dollar.toStringAsFixed(2)}',
+                  style: TextStyle(color: text)),
+              Text('Jumlah pada EUR: €${_euro.toStringAsFixed(2)}',
+                  style: TextStyle(color: text)),
+            ],
+          ),
         ),
       ),
     );

@@ -24,9 +24,10 @@ class FavoritePage extends StatelessWidget {
         backgroundColor: secondary,
       ),
       body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.75,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 200.0,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
         ),
         itemCount: favoriteGames.length,
         itemBuilder: (context, index) {

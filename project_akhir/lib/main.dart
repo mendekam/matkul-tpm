@@ -12,6 +12,7 @@ import 'pages/navigation_page.dart';
 import 'pages/profile_page.dart';
 import 'pages/register_page.dart';
 import 'pages/splashscreen_page.dart';
+import 'pages/waktu_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(builder: (context) => ProfilePage());
         } else if (settings.name == KonversiPage.routeName) {
           return MaterialPageRoute(builder: (context) => KonversiPage());
+        } else if (settings.name == WaktuPage.routeName) {
+          return MaterialPageRoute(builder: (context) => WaktuPage());
         }
         return null;
       },
